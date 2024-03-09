@@ -4,63 +4,83 @@ CC = cc
 
 CFLAGS = -g3 -Wall -Wextra -Werror
 
-LDFLAGS = -fsanitize=address -lasan
+LDFLAGS = -fsanitize=address
 
-SRC = ft_atoi.c \
-		ft_bzero.c \
-		ft_calloc.c \
-		ft_isalnum.c \
-		ft_isalpha.c \
-		ft_isascii.c \
-		ft_isdigit.c \
-		ft_isprint.c \
-		ft_isspace.c \
-		ft_itoa.c \
-		ft_memchr.c \
-		ft_memcmp.c \
-		ft_memcpy.c \
-		ft_memmove.c \
-		ft_memset.c \
-		ft_printf.c \
-		ft_putchar_fd.c \
-		ft_putendl_fd.c \
-		ft_puterr_fd.c \
-		ft_puthex_fd.c \
-		ft_putnbr_fd.c \
-		ft_putptr_fd.c \
-		ft_putstr_fd.c \
-		ft_putuint_fd.c \
-		ft_split.c \
-		ft_strchr.c \
-		ft_strdup.c \
-		ft_striteri.c \
-		ft_strjoin.c \
-		ft_strlcat.c \
-		ft_strlcpy.c \
-		ft_strlen.c \
-		ft_strmapi.c \
-		ft_strncmp.c \
-		ft_strnstr.c \
-		ft_strrchr.c \
-		ft_strtrim.c \
-		ft_substr.c \
-		ft_tolower.c \
-		ft_toupper.c \
-		ft_lstnew.c \
-		ft_lstadd_front.c \
-		ft_lstsize.c \
-		ft_lstlast.c \
-		ft_lstadd_back.c \
-		ft_lstdelone.c \
-		ft_lstclear.c \
-		ft_lstiter.c \
-		ft_lstmap.c \
-		get_next_line.c
+SRC_DIR = src
 
+MEM_SRC_DIR = $(addprefix $(SRC_DIR)/, memory)
+CHR_SRC_DIR = $(addprefix $(SRC_DIR)/, characters)
+STR_SRC_DIR = $(addprefix $(SRC_DIR)/, strings)
+NUM_SRC_DIR = $(addprefix $(SRC_DIR)/, numbers)
+FD_SRC_DIR = $(addprefix $(SRC_DIR)/, file_descriptor)
+FTPRINTF_SRC_DIR = $(addprefix $(SRC_DIR)/, ft_printf)
+LST_SRC_DIR = $(addprefix $(SRC_DIR)/, linked_list)
+GNL_SRC_DIR = $(addprefix $(SRC_DIR)/, get_next_line)
 
-HSRC = libft.h ft_printf.h get_next_line.h
+H_LIB = header/libft.h
+H_FTPRINTF = src/ft_printf/header/ft_printf.h
+H_GNL = src/get_next_line/header/get_next_line.h
 
-OBJ_DIR = obj
+MEM_SRC = $(addprefix $(MEM_SRC_DIR)/, ft_atoi.c) \
+	$(addprefix $(MEM_SRC_DIR)/, ft_bzero.c) \
+	$(addprefix $(MEM_SRC_DIR)/, ft_calloc.c) \
+	$(addprefix $(MEM_SRC_DIR)/, ft_memchr.c) \
+	$(addprefix $(MEM_SRC_DIR)/, ft_memcmp.c) \
+	$(addprefix $(MEM_SRC_DIR)/, ft_memcpy.c) \
+	$(addprefix $(MEM_SRC_DIR)/, ft_memmove.c) \
+	$(addprefix $(MEM_SRC_DIR)/, ft_memset.c)
+
+CHR_SRC = $(addprefix $(CHR_SRC_DIR)/, ft_isalnum.c) \
+	$(addprefix $(CHR_SRC_DIR)/, ft_isalpha.c) \
+	$(addprefix $(CHR_SRC_DIR)/, ft_isascii.c) \
+	$(addprefix $(CHR_SRC_DIR)/, ft_isdigit.c) \
+	$(addprefix $(CHR_SRC_DIR)/, ft_isprint.c) \
+	$(addprefix $(CHR_SRC_DIR)/, ft_isspace.c) \
+	$(addprefix $(CHR_SRC_DIR)/, ft_tolower.c) \
+	$(addprefix $(CHR_SRC_DIR)/, ft_toupper.c)
+
+STR_SRC = $(addprefix $(STR_SRC_DIR)/, ft_split.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_strchr.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_strdup.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_striteri.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_strjoin.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_strlcat.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_strlcpy.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_strlen.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_strmapi.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_strncmp.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_strnstr.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_strrchr.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_strtrim.c) \
+	$(addprefix $(STR_SRC_DIR)/, ft_substr.c)
+
+NUM_SRC = $(addprefix $(NUM_SRC_DIR)/, ft_itoa.c) \
+	$(addprefix $(NUM_SRC_DIR)/, ft_pow.c)
+
+FD_SRC = $(addprefix $(FD_SRC_DIR)/, ft_putchar_fd.c) \
+	$(addprefix $(FD_SRC_DIR)/, ft_putendl_fd.c) \
+	$(addprefix $(FD_SRC_DIR)/, ft_puterr_fd.c) \
+	$(addprefix $(FD_SRC_DIR)/, ft_puthex_fd.c) \
+	$(addprefix $(FD_SRC_DIR)/, ft_putnbr_fd.c) \
+	$(addprefix $(FD_SRC_DIR)/, ft_putptr_fd.c) \
+	$(addprefix $(FD_SRC_DIR)/, ft_putstr_fd.c) \
+	$(addprefix $(FD_SRC_DIR)/, ft_putuint_fd.c)
+
+LST_SRC = $(addprefix $(LST_SRC_DIR)/, ft_lstnew.c) \
+	$(addprefix $(LST_SRC_DIR)/, ft_lstadd_front.c) \
+	$(addprefix $(LST_SRC_DIR)/, ft_lstsize.c) \
+	$(addprefix $(LST_SRC_DIR)/, ft_lstlast.c) \
+	$(addprefix $(LST_SRC_DIR)/, ft_lstadd_back.c) \
+	$(addprefix $(LST_SRC_DIR)/, ft_lstdelone.c) \
+	$(addprefix $(LST_SRC_DIR)/, ft_lstclear.c) \
+	$(addprefix $(LST_SRC_DIR)/, ft_lstiter.c) \
+	$(addprefix $(LST_SRC_DIR)/, ft_lstmap.c)
+
+FTPRINTF_SRC = $(addprefix $(FTPRINTF_SRC_DIR)/, ft_printf.c)
+
+GNL_SRC = $(addprefix $(GNL_SRC_DIR)/, get_next_line.c)
+
+OBJ_DIR = $(addprefix $(SRC_DIR)/, obj)
 
 OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
