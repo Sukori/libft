@@ -92,7 +92,7 @@ H_GNL		= src/get_next_line/header/get_next_line.h
 HSRC		= $(H_LIBFT) $(H_FTPRINTF) $(H_GNL)
 
 # Object files directory
-OBJ_DIRS = $(foreach dir,$(DIRS),$(dir)/obj)
+OBJ_DIRS = $(sort $(foreach dir,$(DIRS),$(dir)/obj))
 
 # Object files
 OBJ			= $(patsubst %.c,$(OBJ_DIRS)/%.o,$(SRC))
@@ -113,7 +113,7 @@ $(NAME): $(OBJ_DIRS) $(OBJ)
     fi
 
 # Create object files directory
-$(OBJ_DIRS)/%.o: %.c
+$(OBJ_DIRS):
 	@echo "Creating obj directories..."
 	@mkdir -p $@
 	@if [ -d obj/ ]; then \
@@ -153,10 +153,3 @@ progress_bar:
 
 # Phony targets
 .PHONY: all clean fclean re  progress_bar
-
-# $@ nom de la cible
-# $< nom de la premiere dependance
-# $ˆ liste des dependances
-# $? liste des dependances mises a jour
-# $* nom du fichier sans son extension
-# $(wildcard *.c)
