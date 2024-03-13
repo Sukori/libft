@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../header/libft.h"
 
 static int	ft_count_splits(char const *str, char chr)
 {

@@ -17,7 +17,7 @@
 #  define BUFFER_SIZE 8
 # endif
 
-# include "libft.h"
+#include "../../../header/libft.h"
 # include <fcntl.h>
 
 // gets the next line of fd

@@ -10,15 +10,23 @@ CFLAGS		= -g3 -Wall -Wextra -Werror
 # Linker flags
 LDFLAGS		= -fsanitize=address
 
+# Header files
+H_LIBFT		= header/libft.h
+H_FTPRINTF	= src/ft_printf/header/ft_printf.h
+H_GNL		= src/get_next_line/header/get_next_line.h
+HSRC		= $(H_LIBFT) $(H_FTPRINTF) $(H_GNL)
+
 # Source directories
-CHAR_DIR	= src/characters
-STR_DIR		= src/strings
-NUM_DIR		= src/numbers
-MEM_DIR		= src/memory
-FD_DIR		= src/file_descriptor
-LIST_DIR	= src/linked_list
-PRINTF_DIR	= src/ft_printf
-GNL_DIR		= src/get_next_line
+
+SRC_DIR			= src/
+CHAR_DIR	= $(SRC_DIR)/characters
+STR_DIR		= $(SRC_DIR)/strings
+NUM_DIR		= $(SRC_DIR)/numbers
+MEM_DIR		= $(SRC_DIR)/memory
+FD_DIR		= $(SRC_DIR)/file_descriptor
+LIST_DIR	= $(SRC_DIR)/linked_list
+PRINTF_DIR	= $(SRC_DIR)/ft_printf
+GNL_DIR		= $(SRC_DIR)/get_next_line
 
 DIRS		= $(CHAR_DIR) $(STR_DIR) $(NUM_DIR) $(MEM_DIR) $(FD_DIR) $(LIST_DIR) $(PRINTF_DIR) $(GNL_DIR)
 
@@ -83,34 +91,39 @@ PRINTF_SRC	= $(PRINTF_DIR)/ft_printf.c
 
 GNL_SRC		= $(GNL_DIR)/get_next_line.c
 
-SRC			= $(foreach dir,$(DIRS),$(wildcard $(dir)/*.c))
+SRC			= $(CHAR_SRC) $(STR_SRC) $(NUM_SRC) $(MEM_SRC) $(FD_SRC) $(LIST_SRC) $(PRINTF_SRC) $(GNL_SRC)
 
-# Header files
-H_LIBFT		= header/libft.h
-H_FTPRINTF	= src/ft_printf/header/ft_printf.h
-H_GNL		= src/get_next_line/header/get_next_line.h
-HSRC		= $(H_LIBFT) $(H_FTPRINTF) $(H_GNL)
-
-# Object files directory
-OBJ_DIRS = $(sort $(foreach dir,$(DIRS),$(dir)/obj))
 
 # Object files
-OBJ			= $(patsubst %.c,$(OBJ_DIRS)/%.o,$(SRC))
+OBJ_DIR		= obj/
+
+OBJ = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o, $(SRC))
+
 
 # Default target
 all: $(NAME)
 	@echo "Thanks for using pberset's Makefile!"
 
 # Build target
-$(NAME): $(OBJ_DIRS) $(OBJ)
+$(NAME): $(OBJ)
 	@echo "	Compilation successfull!"
 	@echo "Creating $(NAME)..."
-	@ar -rcs $@ $(OBJ)
+	@ar -rcs $@ $<
 	@if [ -f $(NAME) ]; then \
         echo "$(NAME) successfully created!"; \
     else \
         echo "$(NAME) ERROR!"; \
     fi
+
+# Build object files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(HSRC)
+	@$(MAKE) --no-print-directory progress_bar
+	@printf "%-20s" $<
+	@printf "\e[20D"
+	@sleep 0.02
+	@printf "%-20s" "                    "
+	@printf "\e[20D"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Create object files directory
 $(OBJ_DIRS):
@@ -123,15 +136,6 @@ $(OBJ_DIRS):
     fi
 	@echo "Compiling..."
 
-# Build object files
-$(OBJ): $(OBJ_DIRS) $(SRC) | $(HSRC)
-	@$(MAKE) --no-print-directory progress_bar
-	@printf "%-20s" $<
-	@printf "\e[20D"
-	@sleep 0.02
-	@printf "%-20s" "                    "
-	@printf "\e[20D"
-	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Clean compiled files
 clean:
@@ -152,4 +156,11 @@ progress_bar:
 	@printf "█"
 
 # Phony targets
-.PHONY: all clean fclean re  progress_bar
+.PHONY: all clean fclean re OBJ_DIRS progress_bar
+
+# $@ nom de la cible
+# $< nom de la premiere dependance
+# $ˆ liste des dependances
+# $? liste des dependances mises a jour
+# $* nom du fichier sans son extension
+# $(wildcard *.c)

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../header/get_next_line.h"
 
 static char	*join_c(char *line_c, char *line_r)
 {

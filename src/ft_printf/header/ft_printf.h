@@ -13,7 +13,7 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft.h"
+#include "../../../header/libft.h"
 # include <stdarg.h>
 
 // 42 printf %(c, s, p, d, i, u, x, X, %)
