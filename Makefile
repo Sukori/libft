@@ -19,16 +19,14 @@ HSRC		= $(H_LIBFT) $(H_FTPRINTF) $(H_GNL)
 # Source directories
 
 SRC_DIR			= src/
-CHAR_DIR	= $(SRC_DIR)/characters
-STR_DIR		= $(SRC_DIR)/strings
-NUM_DIR		= $(SRC_DIR)/numbers
-MEM_DIR		= $(SRC_DIR)/memory
-FD_DIR		= $(SRC_DIR)/file_descriptor
-LIST_DIR	= $(SRC_DIR)/linked_list
-PRINTF_DIR	= $(SRC_DIR)/ft_printf
-GNL_DIR		= $(SRC_DIR)/get_next_line
-
-DIRS		= $(CHAR_DIR) $(STR_DIR) $(NUM_DIR) $(MEM_DIR) $(FD_DIR) $(LIST_DIR) $(PRINTF_DIR) $(GNL_DIR)
+CHAR_DIR	= $(SRC_DIR)characters
+STR_DIR		= $(SRC_DIR)strings
+NUM_DIR		= $(SRC_DIR)numbers
+MEM_DIR		= $(SRC_DIR)memory
+FD_DIR		= $(SRC_DIR)file_descriptor
+LIST_DIR	= $(SRC_DIR)linked_list
+PRINTF_DIR	= $(SRC_DIR)ft_printf
+GNL_DIR		= $(SRC_DIR)get_next_line
 
 # Source files
 CHAR_SRC	= $(CHAR_DIR)/ft_isalnum.c \
@@ -87,17 +85,31 @@ LIST_SRC	= $(LIST_DIR)/ft_lstadd_back.c \
 			$(LIST_DIR)/ft_lstnew.c \
 			$(LIST_DIR)/ft_lstsize.c
 
-PRINTF_SRC	= $(PRINTF_DIR)/ft_printf.c
+PRINTF_SRC	= $(PRINTF_DIR)/src/ft_printf.c
 
-GNL_SRC		= $(GNL_DIR)/get_next_line.c
+GNL_SRC		= $(GNL_DIR)/src/get_next_line.c
 
-SRC			= $(CHAR_SRC) $(STR_SRC) $(NUM_SRC) $(MEM_SRC) $(FD_SRC) $(LIST_SRC) $(PRINTF_SRC) $(GNL_SRC)
-
+SRCS		= $(CHAR_SRC) $(STR_SRC) $(NUM_SRC) $(MEM_SRC) $(FD_SRC) $(LIST_SRC) $(PRINTF_SRC) $(GNL_SRC)
 
 # Object files
-OBJ_DIR		= obj/
+OBJ_DIR		= $(CHAR_DIR)/obj \
+			$(STR_DIR)/obj \
+			$(NUM_DIR)/obj \
+			$(MEM_DIR)/obj \
+			$(FD_DIR)/obj \
+			$(LIST_DIR)/obj \
+			$(PRINTF_DIR)/obj \
+			$(GNL_DIR)/obj
 
-OBJ = $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o, $(SRC))
+# hier ist falsch
+OBJ = $(CHAR_SRC:%.c=$(CHAR_DIR)/obj/%.o) \
+		$(STR_SRC:%.c=$(STR_DIR)/obj/%.o) \
+		$(NUM_SRC:%.c=$(NUM_DIR)/obj/%.o) \
+		$(MEM_SRC:%.c=$(MEM_DIR)/obj/%.o) \
+		$(FD_SRC:%.c=$(FD_DIR)/obj/%.o) \
+		$(LIST_SRC:%.c=$(LIST_DIR)/obj/%.o) \
+		$(PRINTF_SRC:%.c=$(PRINTF_DIR)/obj/%.o) \
+		$(GNL_SRC:%.c=$(GNL_DIR)/obj/%.o)
 
 
 # Default target
@@ -105,42 +117,42 @@ all: $(NAME)
 	@echo "Thanks for using pberset's Makefile!"
 
 # Build target
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(OBJ_DIR)
 	@echo "	Compilation successfull!"
 	@echo "Creating $(NAME)..."
-	@ar -rcs $@ $<
+	@ar -rcs $@ $^
 	@if [ -f $(NAME) ]; then \
-        echo "$(NAME) successfully created!"; \
-    else \
-        echo "$(NAME) ERROR!"; \
-    fi
+		echo "$(NAME) successfully created!"; \
+	else \
+		echo "$(NAME) ERROR!"; \
+	fi
 
 # Build object files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(HSRC)
+$(OBJ): $(SRCS) | $(HSRC)
 	@$(MAKE) --no-print-directory progress_bar
 	@printf "%-20s" $<
 	@printf "\e[20D"
 	@sleep 0.02
-	@printf "%-20s" "                    "
+	@printf "%-20s" "					"
 	@printf "\e[20D"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 # Create object files directory
-$(OBJ_DIRS):
+$(OBJ_DIR):
 	@echo "Creating obj directories..."
 	@mkdir -p $@
 	@if [ -d obj/ ]; then \
-        echo "Folders successfully created!"; \
-    else \
-        echo "mkdir ERROR!"; \
-    fi
+		echo "Folders successfully created!"; \
+	else \
+		echo "mkdir ERROR!"; \
+	fi
 	@echo "Compiling..."
 
 
 # Clean compiled files
 clean:
 	@echo "Cleaning obj/ directory..."
-	@rm -rf $(OBJ_DIRS)
+	@rm -rf $(OBJ_DIR)
 
 # Full clean
 fclean: clean
@@ -156,7 +168,7 @@ progress_bar:
 	@printf "█"
 
 # Phony targets
-.PHONY: all clean fclean re OBJ_DIRS progress_bar
+.PHONY: all clean fclean re progress_bar
 
 # $@ nom de la cible
 # $< nom de la premiere dependance
