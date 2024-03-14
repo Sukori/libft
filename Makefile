@@ -11,14 +11,12 @@ CFLAGS		= -g3 -Wall -Wextra -Werror
 LDFLAGS		= -fsanitize=address
 
 # Header files
-H_LIBFT		= header/libft.h
-H_FTPRINTF	= src/ft_printf/header/ft_printf.h
-H_GNL		= src/get_next_line/header/get_next_line.h
-HSRC		= $(H_LIBFT) $(H_FTPRINTF) $(H_GNL)
+HSRC		= header/
 
 # Source directories
 
 SRC_DIR			= src/
+
 CHAR_DIR	= $(SRC_DIR)characters
 STR_DIR		= $(SRC_DIR)strings
 NUM_DIR		= $(SRC_DIR)numbers
@@ -85,42 +83,34 @@ LIST_SRC	= $(LIST_DIR)/ft_lstadd_back.c \
 			$(LIST_DIR)/ft_lstnew.c \
 			$(LIST_DIR)/ft_lstsize.c
 
-PRINTF_SRC	= $(PRINTF_DIR)/src/ft_printf.c
+PRINTF_SRC	= $(PRINTF_DIR)/ft_printf.c
 
-GNL_SRC		= $(GNL_DIR)/src/get_next_line.c
+GNL_SRC		= $(GNL_DIR)/get_next_line.c
 
-SRCS		= $(CHAR_SRC) $(STR_SRC) $(NUM_SRC) $(MEM_SRC) $(FD_SRC) $(LIST_SRC) $(PRINTF_SRC) $(GNL_SRC)
+SRCS		= $(CHAR_SRC) \
+			$(STR_SRC) \
+			$(NUM_SRC) \
+			$(MEM_SRC) \
+			$(FD_SRC) \
+			$(LIST_SRC) \
+			$(PRINTF_SRC) \
+			$(GNL_SRC)
 
 # Object files
-OBJ_DIR		= $(CHAR_DIR)/obj \
-			$(STR_DIR)/obj \
-			$(NUM_DIR)/obj \
-			$(MEM_DIR)/obj \
-			$(FD_DIR)/obj \
-			$(LIST_DIR)/obj \
-			$(PRINTF_DIR)/obj \
-			$(GNL_DIR)/obj
+OBJ_DIR		= obj/
 
 # hier ist falsch
-OBJ = $(CHAR_SRC:%.c=$(CHAR_DIR)/obj/%.o) \
-		$(STR_SRC:%.c=$(STR_DIR)/obj/%.o) \
-		$(NUM_SRC:%.c=$(NUM_DIR)/obj/%.o) \
-		$(MEM_SRC:%.c=$(MEM_DIR)/obj/%.o) \
-		$(FD_SRC:%.c=$(FD_DIR)/obj/%.o) \
-		$(LIST_SRC:%.c=$(LIST_DIR)/obj/%.o) \
-		$(PRINTF_SRC:%.c=$(PRINTF_DIR)/obj/%.o) \
-		$(GNL_SRC:%.c=$(GNL_DIR)/obj/%.o)
-
+OBJ			= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 
 # Default target
 all: $(NAME)
 	@echo "Thanks for using pberset's Makefile!"
 
 # Build target
-$(NAME): $(OBJ) $(OBJ_DIR)
+$(NAME): $(OBJ)
 	@echo "	Compilation successfull!"
 	@echo "Creating $(NAME)..."
-	@ar -rcs $@ $^
+	@ar -rcs $@ $<
 	@if [ -f $(NAME) ]; then \
 		echo "$(NAME) successfully created!"; \
 	else \
@@ -128,17 +118,7 @@ $(NAME): $(OBJ) $(OBJ_DIR)
 	fi
 
 # Build object files
-$(OBJ): $(SRCS) | $(HSRC)
-	@$(MAKE) --no-print-directory progress_bar
-	@printf "%-20s" $<
-	@printf "\e[20D"
-	@sleep 0.02
-	@printf "%-20s" "					"
-	@printf "\e[20D"
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-# Create object files directory
-$(OBJ_DIR):
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(HSRC)
 	@echo "Creating obj directories..."
 	@mkdir -p $@
 	@if [ -d obj/ ]; then \
@@ -147,7 +127,13 @@ $(OBJ_DIR):
 		echo "mkdir ERROR!"; \
 	fi
 	@echo "Compiling..."
-
+	@$(MAKE) --no-print-directory progress_bar
+	@printf "%-20s" $<
+	@printf "\e[20D"
+	@sleep 0.02
+	@printf "%-20s" "					"
+	@printf "\e[20D"
+	@$(CC) $(CFLAGS) $(HSRC) -c $< -o $@
 
 # Clean compiled files
 clean:
@@ -158,9 +144,11 @@ clean:
 fclean: clean
 	@echo "Removing $(NAME)..."
 	@rm -rf $(NAME)
+	@echo "Cleaning complete!"
 
 # Rebuild from scratch
 re: fclean
+	@echo "Remaking project..."
 	@$(MAKE) --no-print-directory all
 
 #progress bar
