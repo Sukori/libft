@@ -6,7 +6,7 @@
 /*   By: pberset <pberset@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:55:47 by pberset           #+#    #+#             */
-/*   Updated: 2024/03/14 14:23:17 by pberset          ###   ########.fr       */
+/*   Updated: 2024/03/14 16:37:31 by pberset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*));
 // Allocates memory of size_t size for size_t count elements. 
 // Returns NULL pointer if size || count == 0
 void	*ft_calloc(size_t count, size_t size);
+// Frees a tab of strings
+void	ft_free_tab(char **tab);
 // Returns the index of void *s that matches int c (char) whithin size_t n
 void	*ft_memchr(const void *s, int c, size_t n);
 // Copies size_t n elements from void *src into void *dst
@@ -127,6 +129,11 @@ void	*ft_memset(void *b, int c, size_t len);
 typedef struct s_list
 {
 	void			*content;
+	int				index;
+	int				push_cost;
+	int				rotate_direction;
+	int				cheapest;
+	struct s_list	*target;
 	struct s_list	*next;
 }					t_list;
 // Allocates and returns a new node. 

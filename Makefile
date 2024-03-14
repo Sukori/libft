@@ -21,6 +21,7 @@ SRC      = ft_atoi.c \
            ft_isprint.c \
            ft_isspace.c \
            ft_itoa.c \
+		   ft_free_tab.c \
            ft_memchr.c \
            ft_memcmp.c \
            ft_memcmp_int.c \
