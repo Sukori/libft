@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pberset <pberset@student.42.fr>            +#+  +:+       +#+        */
+/*   By: pberset <pberset@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:55:47 by pberset           #+#    #+#             */
-/*   Updated: 2024/01/27 17:59:14 by pberset          ###   ########.fr       */
+/*   Updated: 2024/03/14 14:23:17 by pberset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 // and returns the difference of the mismatch. 
 // + if s1 is bigger, Otherwise -
 int		ft_memcmp_i(const int *i1, const int *i2);
+// Computes the power of 10 of int pow
+int		ft_pow10(int pow);
 // Compares char *s1 and char *s2 whithin size_t n 
 // and returns the difference of the first mismatch. 
 // 0 < if s1 is bigger, 0 > otherwise
