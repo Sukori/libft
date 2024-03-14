@@ -6,7 +6,7 @@
 /*   By: pberset <pberset@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:07:58 by pberset           #+#    #+#             */
-/*   Updated: 2023/10/20 13:12:19 by pberset          ###   ########.fr       */
+/*   Updated: 2024/03/14 21:59:43 by pberset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,6 @@ static int	ft_splitlen(char const *str, char chr)
 	while (*(str + len) != chr && *(str + len))
 		len++;
 	return (len);
-}
-
-static void	ft_free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
 }
 
 static char	*ft_fill_array_index(const char *src, char c)
