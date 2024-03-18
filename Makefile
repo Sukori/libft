@@ -1,135 +1,218 @@
+# Colours
+b		= \033[0;34m
+bb		= \033[1;34m
+g		= \033[0;32m
+gb		= \033[1;32m
+gbg		= \033[42m
+p		= \033[1;35m
+rb		= \033[1;31m
+y		= \033[0;33m
+yb		= \033[1;33m
+x		= \033[0m
+
 # Target executable/library name
-NAME     = libft.a
+NAME	= libft.a
 
 # Compiler
-CC       = cc
+CC		= cc
 
 # Compiler flags
-CFLAGS   = -g3 -Wall -Wextra -Werror
+CFLAGS	= -g3 -Wall -Wextra -Werror
 
 # Linker flags
-LDFLAGS  = -fsanitize=address -lasan
+LDFLAGS	= -fsanitize=address -lasan
 
-# Source files
-SRC      = ft_atoi.c \
-           ft_bzero.c \
-           ft_calloc.c \
-           ft_isalnum.c \
-           ft_isalpha.c \
-           ft_isascii.c \
-           ft_isdigit.c \
-           ft_isprint.c \
-           ft_isspace.c \
-           ft_itoa.c \
-		   ft_free_tab.c \
-           ft_memchr.c \
-           ft_memcmp.c \
-           ft_memcmp_int.c \
-           ft_memcpy.c \
-           ft_memmove.c \
-           ft_memset.c \
-		   ft_pow10.c \
-           ft_printf.c \
-           ft_putchar_fd.c \
-           ft_putendl_fd.c \
-           ft_puterr_fd.c \
-           ft_puthex_fd.c \
-           ft_putnbr_fd.c \
-           ft_putptr_fd.c \
-           ft_putstr_fd.c \
-           ft_putuint_fd.c \
-           ft_split.c \
-           ft_strchr.c \
-           ft_strdup.c \
-           ft_striteri.c \
-           ft_strjoin.c \
-           ft_strlcat.c \
-           ft_strlcpy.c \
-           ft_strlen.c \
-           ft_strmapi.c \
-           ft_strncmp.c \
-           ft_strnstr.c \
-           ft_strrchr.c \
-           ft_strtrim.c \
-           ft_substr.c \
-           ft_tolower.c \
-           ft_toupper.c \
-           ft_lstnew.c \
-           ft_lstadd_front.c \
-           ft_lstsize.c \
-           ft_lstlast.c \
-           ft_lstadd_back.c \
-           ft_lstdelone.c \
-           ft_lstclear.c \
-           ft_lstiter.c \
-           ft_lstmap.c \
-           get_next_line.c
+# Folders
+SRCDIR	= src/
+OBJDIR	= obj/
+HEADDIR	= header/
+
+FD_DIR	= fd_/
+MEMDIR	= mem/
+CHRDIR	= chr/
+NUMDIR	= num/
+STRDIR	= str/
+LSTDIR	= lst/
+GNLDIR	= gnl/
+PRTFDIR	= prtf/
 
 # Header files
-HSRC     = libft.h ft_printf.h get_next_line.h
+HEADSRC	= $(HEADDIR)libft.h \
+		$(HEADDIR)ft_printf.h \
+		$(HEADDIR)get_next_line.h
 
-# Object files directory
-OBJ_DIR  = obj
+# Source files
+SRCFD_	= ft_putchar_fd \
+		ft_putstr_fd \
+		ft_putendl_fd \
+		ft_putnbr_fd \
+		ft_puterr_fd \
+		ft_puthex_fd \
+		ft_putptr_fd \
+		ft_putuint_fd
+
+SRFMEM	= ft_memset \
+		ft_memcpy \
+		ft_memmove \
+		ft_memchr \
+		ft_memcmp \
+		ft_memcmp_int \
+		ft_free_tab \
+		ft_calloc
+
+SRCCHR	= ft_isalpha \
+		ft_isdigit \
+		ft_isalnum \
+		ft_isascii \
+		ft_isprint \
+		ft_isspace
+
+SRCNUM	= ft_itoa \
+		ft_pow10
+
+SRCSTR	= ft_strlen \
+		ft_atoi \
+		ft_bzero \
+		ft_strrchr \
+		ft_split \
+		ft_strtrim \
+		ft_strjoin \
+		ft_strmapi \
+		ft_striteri \
+		ft_strchr \
+		ft_strnstr \
+		ft_strncmp \
+		ft_strlcpy \
+		ft_strlcat \
+		ft_strdup \
+		ft_substr \
+		ft_tolower \
+		ft_toupper
+
+SRCLST	= ft_lstnew \
+		ft_lstadd_front \
+		ft_lstsize \
+		ft_lstlast \
+		ft_lstadd_back \
+		ft_lstdelone \
+		ft_lstclear \
+		ft_lstiter \
+		ft_lstmap
+
+SRCGNL	= get_next_line
+
+SRCPRTF	= ft_printf
+
+SRC		= $(addprefix $(SRCDIR)$(FD_DIR), $(addsuffix .c, $(SRCFD_))) \
+		$(addprefix $(SRCDIR)$(MEMDIR), $(addsuffix .c, $(SRFMEM))) \
+		$(addprefix $(SRCDIR)$(CHRDIR), $(addsuffix .c, $(SRCCHR))) \
+		$(addprefix $(SRCDIR)$(NUMDIR), $(addsuffix .c, $(SRCNUM))) \
+		$(addprefix $(SRCDIR)$(STRDIR), $(addsuffix .c, $(SRCSTR))) \
+		$(addprefix $(SRCDIR)$(LSTDIR), $(addsuffix .c, $(SRCLST))) \
+		$(addprefix $(SRCDIR)$(GNLDIR), $(addsuffix .c, $(SRCGNL))) \
+		$(addprefix $(SRCDIR)$(PRTFDIR), $(addsuffix .c, $(SRCPRTF)))
 
 # Object files
-OBJ      = $(SRC:%.c=$(OBJ_DIR)/%.o)
+OBJ		= $(addprefix $(OBJDIR)$(FD_DIR), $(addsuffix .o, $(SRCFD_))) \
+		$(addprefix $(OBJDIR)$(MEMDIR), $(addsuffix .o, $(SRFMEM))) \
+		$(addprefix $(OBJDIR)$(CHRDIR), $(addsuffix .o, $(SRCCHR))) \
+		$(addprefix $(OBJDIR)$(NUMDIR), $(addsuffix .o, $(SRCNUM))) \
+		$(addprefix $(OBJDIR)$(STRDIR), $(addsuffix .o, $(SRCSTR))) \
+		$(addprefix $(OBJDIR)$(LSTDIR), $(addsuffix .o, $(SRCLST))) \
+		$(addprefix $(OBJDIR)$(GNLDIR), $(addsuffix .o, $(SRCGNL))) \
+		$(addprefix $(OBJDIR)$(PRTFDIR), $(addsuffix .o, $(SRCPRTF)))
 
 # Default target
-all: $(NAME)
-	@echo "Thanks for using pberset's Makefile!"
+all: $(OBJDIR) $(NAME)
+	@echo "$p    ,d88b.d88b,                                      ,d88b.d88b,"
+	@echo "    88888888888                                      88888888888"
+	@echo "    \`Y8888888Y' Thanks for using pberset's Makefile! \`Y8888888Y'"
+	@echo "      \`Y888Y'                                          \`Y888Y'"
+	@echo "        \`Y'                                              \`Y'    $x"
 
 # Build target
-$(NAME): $(OBJ_DIR) $(OBJ)
-	@echo "	Compilation successfull!"
-	@echo "Creating $(NAME)..."
+$(NAME): $(OBJ)
+	@echo "$(g) Compilation successfull!$x"
+	@echo ""
+	@echo "$(bb)Creating $(NAME)...$x"
 	@ar -rcs $@ $(OBJ)
 	@if [ -f $(NAME) ]; then \
-        echo "$(NAME) successfully created!"; \
-    else \
-        echo "$(NAME) ERROR!"; \
-    fi
+		  echo "$b$(NAME) successfully created!$x"; \
+		  echo ""; \
+	 else \
+		  echo "$(rb)$(NAME) ERROR!$x"; \
+		  echo ""; \
+	 fi
 
 # Create object files directory
-$(OBJ_DIR):
-	@echo "Creating obj directory..."
-	@mkdir -p $(OBJ_DIR)
+$(OBJDIR):
+	@$(MAKE) --no-print-directory tux
+	@echo "$(yb)Creating obj directories...$x"
+	@mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)$(FD_DIR)
+	@mkdir -p $(OBJDIR)$(MEMDIR)
+	@mkdir -p $(OBJDIR)$(CHRDIR)
+	@mkdir -p $(OBJDIR)$(NUMDIR)
+	@mkdir -p $(OBJDIR)$(STRDIR)
+	@mkdir -p $(OBJDIR)$(LSTDIR)
+	@mkdir -p $(OBJDIR)$(GNLDIR)
+	@mkdir -p $(OBJDIR)$(PRTFDIR)
 	@if [ -d obj/ ]; then \
-        echo "Folder successfully created!"; \
-    else \
-        echo "mkdir ERROR!"; \
-    fi
-	@echo "Compiling..."
+		  echo "$(y)Folders successfully created!$x"; \
+		  echo ""; \
+	 else \
+		  echo "$(rb)mkdir ERROR!$x"; \
+		  echo ""; \
+	 fi
+	@echo "$(gb)Compiling...$x"
 
 # Build object files
-$(OBJ_DIR)/%.o: %.c | $(HSRC)
+$(OBJDIR)%.o: $(SRCDIR)%.c | $(HEADSRC)
 	@$(MAKE) --no-print-directory progress_bar
-	@printf "%-20s" $<
-	@printf "\e[20D"
-	@sleep 0.02
-	@printf "%-20s" "                    "
-	@printf "\e[20D"
+	@printf "%-30s" $*
+	@sleep 0.01
+	@printf "\e[30D\e[K"
 	@$(CC) $(CFLAGS) -c $^ -o $@
 
 # Clean compiled files
 clean:
-	@echo "Cleaning obj/ directory..."
-	@rm -rf $(OBJ_DIR)
-	@echo "Cleaned!"
+	@echo "$(yb)Cleaning obj/ directory...$x"
+	@rm -rf $(OBJDIR)
+	@echo "$(y)Cleaned!$x"
+	@echo ""
 
 # Full clean
 fclean: clean
-	@echo "Removing $(NAME)..."
+	@echo "$(bb)Removing $(NAME)...$x"
 	@rm -rf $(NAME)
-	@echo "Removed!"
+	@echo "$(b)Removed!$x"
+	@echo ""
 
 # Rebuild from scratch
 re: fclean
-	@echo "Reseting..."
+	@echo "$(rb)Reseting...$x"
+	@echo ""
 	@$(MAKE) --no-print-directory all
+
+# TUX
+ tux:
+	@echo " ________________________ "
+	@echo "< Let's compile $(NAME)! >"
+	@echo " ------------------------ "
+	@echo "   \\"
+	@echo "    \\"
+	@echo "        .--."
+	@echo "       |o_o |"
+	@echo "       |:_/ |"
+	@echo "      //   \ \\"
+	@echo "     (|     | )"
+	@echo "    /'\\_   _/\`\\"
+	@echo "    \\___)=(___/"
+	@echo ""
 
 #progress bar
 progress_bar:
-	@printf "█"
+	@printf "$(gbg) $x"
 
 # Phony targets
 .PHONY: all clean fclean re  progress_bar
