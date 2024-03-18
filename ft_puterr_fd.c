@@ -6,7 +6,7 @@
 /*   By: pberset <pberset@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 11:16:09 by pberset           #+#    #+#             */
-/*   Updated: 2024/03/17 15:43:43 by pberset          ###   ########.fr       */
+/*   Updated: 2024/03/18 10:36:38 by pberset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_puterr_fd(char *s)
 	write(1, ANSI_COLOR_BOLD_RED, 7);
 	if (!s)
 	{
-		write(1, "(null)", 6);
+		write(STDERR_FILENO, "(null)", 6);
 		return (6);
 	}
 	while (*s)
@@ -31,6 +31,6 @@ int	ft_puterr_fd(char *s)
 		check += ft_putchar_fd(*s, STDERR_FILENO);
 		s++;
 	}
-	write(1, ANSI_COLOR_RESET, 4);
+	write(STDERR_FILENO, ANSI_COLOR_RESET, 4);
 	return (check);
 }

@@ -6,7 +6,7 @@
 /*   By: pberset <pberset@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 12:36:46 by pberset           #+#    #+#             */
-/*   Updated: 2023/12/04 16:37:54 by pberset          ###   ########.fr       */
+/*   Updated: 2024/03/18 10:36:09 by pberset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_putstr_fd(char *s, int fd)
 	check = 0;
 	if (!s)
 	{
-		write(1, "(null)", 6);
+		ft_puterr_fd("(null)");
 		return (6);
 	}
 	while (*s)
