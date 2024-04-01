@@ -6,7 +6,7 @@
 /*   By: pberset <pberset@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:07:58 by pberset           #+#    #+#             */
-/*   Updated: 2024/03/18 14:30:28 by pberset          ###   ########.fr       */
+/*   Updated: 2024/04/01 11:03:47 by pberset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_count_splits(char const *str, char chr)
 		}
 		if ((*str == chr && letters) || !*str)
 			words++;
-		if (*str)
+		if (*str + 1)
 			str++;
 	}
 	return (words);
