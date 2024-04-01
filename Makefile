@@ -52,6 +52,7 @@ SRCFD_	= ft_putchar_fd \
 		ft_putuint_fd
 
 SRFMEM	= ft_memset \
+		ft_bzero \
 		ft_memcpy \
 		ft_memmove \
 		ft_memchr \
@@ -72,7 +73,6 @@ SRCNUM	= ft_itoa \
 
 SRCSTR	= ft_strlen \
 		ft_atoi \
-		ft_bzero \
 		ft_strrchr \
 		ft_split \
 		ft_strtrim \
