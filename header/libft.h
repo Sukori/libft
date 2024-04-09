@@ -6,7 +6,7 @@
 /*   By: pberset <pberset@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:55:47 by pberset           #+#    #+#             */
-/*   Updated: 2024/03/14 16:37:31 by pberset          ###   ########.fr       */
+/*   Updated: 2024/04/09 10:55:43 by pberset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,6 @@ void	*ft_memset(void *b, int c, size_t len);
 typedef struct s_list
 {
 	void			*content;
-	int				index;
-	int				push_cost;
-	int				rotate_direction;
-	int				cheapest;
-	struct s_list	*target;
 	struct s_list	*next;
 }					t_list;
 // Allocates and returns a new node. 
