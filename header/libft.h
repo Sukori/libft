@@ -6,7 +6,7 @@
 /*   By: pberset <pberset@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 13:55:47 by pberset           #+#    #+#             */
-/*   Updated: 2024/05/27 13:44:31 by pberset          ###   ########.fr       */
+/*   Updated: 2024/05/27 13:49:49 by pberset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	*ft_calloc(size_t count, size_t size);
 // Frees a tab of strings
 void	ft_free_tab(char **tab);
 // Frees a tab of int
-void	ft_free_int_tab(int **tab);
+void	ft_free_int_tab(int **tab, size_t size);
 // Returns the index of void *s that matches int c (char) whithin size_t n
 void	*ft_memchr(const void *s, int c, size_t n);
 // Copies size_t n elements from void *src into void *dst
