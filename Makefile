@@ -39,7 +39,7 @@ SRCFD_	= ft_putchar_fd \
 		ft_putptr_fd \
 		ft_putuint_fd
 
-SRFMEM	= ft_memset \
+SRCMEM	= ft_memset \
 		ft_bzero \
 		ft_memcpy \
 		ft_memmove \
@@ -93,7 +93,7 @@ SRCGNL	= get_next_line
 SRCPRTF	= ft_printf
 
 SRC		= $(addprefix $(SRCDIR)$(FD_DIR), $(addsuffix .c, $(SRCFD_))) \
-		$(addprefix $(SRCDIR)$(MEMDIR), $(addsuffix .c, $(SRFMEM))) \
+		$(addprefix $(SRCDIR)$(MEMDIR), $(addsuffix .c, $(SRCMEM))) \
 		$(addprefix $(SRCDIR)$(CHRDIR), $(addsuffix .c, $(SRCCHR))) \
 		$(addprefix $(SRCDIR)$(NUMDIR), $(addsuffix .c, $(SRCNUM))) \
 		$(addprefix $(SRCDIR)$(STRDIR), $(addsuffix .c, $(SRCSTR))) \
@@ -103,7 +103,7 @@ SRC		= $(addprefix $(SRCDIR)$(FD_DIR), $(addsuffix .c, $(SRCFD_))) \
 
 # Object files
 OBJ		= $(addprefix $(OBJDIR)$(FD_DIR), $(addsuffix .o, $(SRCFD_))) \
-		$(addprefix $(OBJDIR)$(MEMDIR), $(addsuffix .o, $(SRFMEM))) \
+		$(addprefix $(OBJDIR)$(MEMDIR), $(addsuffix .o, $(SRCMEM))) \
 		$(addprefix $(OBJDIR)$(CHRDIR), $(addsuffix .o, $(SRCCHR))) \
 		$(addprefix $(OBJDIR)$(NUMDIR), $(addsuffix .o, $(SRCNUM))) \
 		$(addprefix $(OBJDIR)$(STRDIR), $(addsuffix .o, $(SRCSTR))) \
