@@ -1,15 +1,3 @@
-# Colours
-b		= \033[0;34m
-bb		= \033[1;34m
-g		= \033[0;32m
-gb		= \033[1;32m
-gbg		= \033[42m
-p		= \033[1;35m
-rb		= \033[1;31m
-y		= \033[0;33m
-yb		= \033[1;33m
-x		= \033[0m
-
 # Target executable/library name
 NAME	= libft.a
 
@@ -125,30 +113,16 @@ OBJ		= $(addprefix $(OBJDIR)$(FD_DIR), $(addsuffix .o, $(SRCFD_))) \
 
 # Default target
 all: $(OBJDIR) $(NAME)
-	@echo "$p    ,d88b.d88b,                                      ,d88b.d88b,"
-	@echo "    88888888888                                      88888888888"
-	@echo "    \`Y8888888Y' Thanks for using pberset's Makefile! \`Y8888888Y'"
-	@echo "      \`Y888Y'                                          \`Y888Y'"
-	@echo "        \`Y'                                              \`Y'    $x"
+	@echo "Compilation of $(NAME) done!"
 
 # Build target
 $(NAME): $(OBJ)
-	@echo "$(g) Compilation successfull!$x"
-	@echo ""
-	@echo "$(bb)Creating $(NAME)...$x"
+	@echo "Archiving $(NAME)..."
 	@ar -rcs $@ $(OBJ)
-	@if [ -f $(NAME) ]; then \
-		  echo "$b$(NAME) successfully created!$x"; \
-		  echo ""; \
-	 else \
-		  echo "$(rb)$(NAME) ERROR!$x"; \
-		  echo ""; \
-	 fi
 
 # Create object files directory
 $(OBJDIR):
-	@$(MAKE) --no-print-directory tux
-	@echo "$(yb)Creating obj directories...$x"
+	@echo "Creating obj directories..."
 	@mkdir -p $(OBJDIR)
 	@mkdir -p $(OBJDIR)$(FD_DIR)
 	@mkdir -p $(OBJDIR)$(MEMDIR)
@@ -158,36 +132,21 @@ $(OBJDIR):
 	@mkdir -p $(OBJDIR)$(LSTDIR)
 	@mkdir -p $(OBJDIR)$(GNLDIR)
 	@mkdir -p $(OBJDIR)$(PRTFDIR)
-	@if [ -d obj/ ]; then \
-		  echo "$(y)Folders successfully created!$x"; \
-		  echo ""; \
-	 else \
-		  echo "$(rb)mkdir ERROR!$x"; \
-		  echo ""; \
-	 fi
-	@echo "$(gb)Compiling...$x"
 
 # Build object files
 $(OBJDIR)%.o: $(SRCDIR)%.c | $(HEADSRC)
-	@$(MAKE) --no-print-directory progress_bar
-	@printf "%-30s" $*
-	@sleep 0.01
-	@printf "\e[30D\e[K"
+	@echo "Compiling $<"
 	@$(CC) $(CFLAGS) -c $^ -o $@
 
 # Clean compiled files
 clean:
 	@echo "$(yb)Cleaning obj/ directory...$x"
 	@rm -rf $(OBJDIR)
-	@echo "$(y)Cleaned!$x"
-	@echo ""
 
 # Full clean
 fclean: clean
 	@echo "$(bb)Removing $(NAME)...$x"
 	@rm -rf $(NAME)
-	@echo "$(b)Removed!$x"
-	@echo ""
 
 # Rebuild from scratch
 re: fclean
@@ -195,28 +154,8 @@ re: fclean
 	@echo ""
 	@$(MAKE) --no-print-directory all
 
-# TUX
- tux:
-	@echo " ________________________ "
-	@echo "< Let's compile $(NAME)! >"
-	@echo " ------------------------ "
-	@echo "   \\"
-	@echo "    \\"
-	@echo "        .--."
-	@echo "       |o_o |"
-	@echo "       |:_/ |"
-	@echo "      //   \ \\"
-	@echo "     (|     | )"
-	@echo "    /'\\_   _/\`\\"
-	@echo "    \\___)=(___/"
-	@echo ""
-
-#progress bar
-progress_bar:
-	@printf "$(gbg) $x"
-
 # Phony targets
-.PHONY: all clean fclean re  progress_bar
+.PHONY: all clean fclean re progress_bar
 
 # $@ nom de la cible
 # $< nom de la premiere dependance
