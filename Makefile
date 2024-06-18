@@ -5,10 +5,7 @@ NAME	= libft.a
 CC		= cc
 
 # Compiler flags
-CFLAGS	= -g3 -Wall -Wextra -Werror
-
-# Linker flags
-LDFLAGS	= -fsanitize=address -lasan
+CFLAGS	= -Wall -Wextra -Werror
 
 # Folders
 SRCDIR	= src/
