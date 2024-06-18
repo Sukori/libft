@@ -6,7 +6,7 @@
 /*   By: pberset <pberset@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 16:07:58 by pberset           #+#    #+#             */
-/*   Updated: 2024/04/01 11:03:47 by pberset          ###   ########.fr       */
+/*   Updated: 2024/06/18 22:09:32 by pberset          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ static char	*ft_fill_array_index(const char *src, char c)
 	return (dst);
 }
 
+static int	skip_delim(char const *s, char c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] == c)
+		i++;
+	return (i);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**str_array;
@@ -67,15 +77,15 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	while (i < c_splits && *s)
 	{
-		while (*s == c)
-			s++;
+		s += skip_delim(s, c);
 		str_array[i] = ft_fill_array_index(s, c);
 		if (!str_array[i])
 		{
 			ft_free_tab(str_array);
 			return (NULL);
 		}
-		s += ft_strlen(str_array[i]) + 1;
+		s += ft_strlen(str_array[i]);
+		s += skip_delim(s, c);
 		i++;
 	}
 	str_array[i] = 0;
