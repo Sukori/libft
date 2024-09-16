@@ -152,7 +152,7 @@ re: fclean
 	@$(MAKE) --no-print-directory all
 
 # Phony targets
-.PHONY: all clean fclean re progress_bar
+.PHONY: all clean fclean re
 
 # $@ nom de la cible
 # $< nom de la premiere dependance
